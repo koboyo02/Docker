@@ -1,0 +1,31 @@
+version: '3.2'
+
+services:
+
+ database:
+  build: ./db
+  networks:
+      - frontend
+  volumes:
+   - db_volume:/var/lib/mysql
+
+ back:
+   build: ./back
+   networks:
+        - frontend
+   ports:
+        - "7777:7777" 
+
+ front:
+    build: ./front
+    networks: 
+        - frontend
+    ports: 
+        - "8080:8080"
+
+volumes:
+   db_volume:
+
+networks:
+  frontend:
+    name: client1
